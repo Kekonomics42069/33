@@ -8,7 +8,26 @@
   <!-- Mirror and index made by HTTrack Website Copier/3.49-2 [XR&CO'2014] -->
 	<style type="text/css">
 	<!--
+<script>
+  async function connectPhantomWallet() {
+    if ('solana' in window) {
+      const provider = window.solana;
 
+      if (provider.isPhantom) {
+        try {
+          const resp = await provider.connect();
+          const walletAddress = resp.publicKey.toString();
+          document.getElementById("wallet-status").innerText = "Connected: " + walletAddress;
+        } catch (err) {
+          console.error("User rejected the connection or an error occurred", err);
+        }
+      }
+    } else {
+      alert("Phantom Wallet not found. Please install it from https://phantom.app");
+    }
+  }
+</script>
+		
 body {
 	margin: 0;  padding: 0;  margin-bottom: 15px;  margin-top: 8px;
 	background: #77b;
